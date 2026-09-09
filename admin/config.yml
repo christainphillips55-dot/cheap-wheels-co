@@ -1,0 +1,58 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "inventory"
+    label: "Inventory"
+    files:
+      - file: "cars.json"
+        label: "Cars"
+        name: "cars"
+        fields:
+          - label: "Vehicles"
+            name: "vehicles"
+            widget: "list"
+            fields:
+              - label: "ID"
+                name: "id"
+                widget: "number"
+              - label: "Name"
+                name: "name"
+                widget: "string"
+              - label: "Year"
+                name: "year"
+                widget: "number"
+                value_type: "int"
+              - label: "Price"
+                name: "price"
+                widget: "number"
+                value_type: "int"
+              - label: "MSRP"
+                name: "msrp"
+                widget: "number"
+                value_type: "int"
+              - label: "Mileage"
+                name: "mileage"
+                widget: "number"
+                value_type: "int"
+              - label: "Transmission"
+                name: "transmission"
+                widget: "select"
+                options: ["Automatic", "Manual"]
+              - label: "MPG"
+                name: "mpg"
+                widget: "number"
+                value_type: "int"
+              - label: "Image"
+                name: "image"
+                widget: "image"
+                required: false
+              - label: "Status"
+                name: "status"
+                widget: "select"
+                options: ["available", "sold"]
+                default: "available"

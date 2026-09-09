@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Toyota Corolla",
+    "year": 2020,
+    "price": 12900,
+    "msrp": 18600,
+    "mileage": 42100,
+    "transmission": "Automatic",
+    "mpg": 34,
+    "image": "",
+    "status": "available"
+  },
+  {
+    "id": 2,
+    "name": "Honda Civic",
+    "year": 2019,
+    "price": 11700,
+    "msrp": 17900,
+    "mileage": 50800,
+    "transmission": "Automatic",
+    "mpg": 36,
+    "image": "",
+    "status": "available"
+  },
+  {
+    "id": 3,
+    "name": "Mazda 3",
+    "year": 2018,
+    "price": 9800,
+    "msrp": 16400,
+    "mileage": 62300,
+    "transmission": "Manual",
+    "mpg": 31,
+    "image": "",
+    "status": "available"
+  },
+  {
+    "id": 4,
+    "name": "Subaru Forester",
+    "year": 2021,
+    "price": 14800,
+    "msrp": 22100,
+    "mileage": 33800,
+    "transmission": "Automatic",
+    "mpg": 29,
+    "image": "",
+    "status": "available"
+  }
+]

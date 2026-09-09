@@ -1,51 +1,57 @@
-const makes = [
-  ["Toyota", ["Corolla", "Camry", "RAV4", "Prius"]],
-  ["Honda", ["Civic", "Accord", "CR-V", "Fit"]],
-  ["Mazda", ["3", "6", "CX-5", "CX-3"]],
-  ["Ford", ["Focus", "Fusion", "Escape", "Maverick"]],
-  ["Hyundai", ["Elantra", "Sonata", "Tucson", "Kona"]],
-  ["Subaru", ["Impreza", "Legacy", "Forester", "Crosstrek"]],
-  ["Kia", ["Forte", "Optima", "Soul", "Sportage"]],
-  ["Volkswagen", ["Jetta", "Passat", "Golf", "Tiguan"]],
-  ["Nissan", ["Sentra", "Altima", "Rogue", "Kicks"]],
-  ["Chevrolet", ["Cruze", "Malibu", "Equinox", "Trax"]],
-  ["Volvo", ["S60", "V60", "XC40", "XC60"]],
-  ["Acura", ["ILX", "TLX", "RDX", "MDX"]],
-  ["Lexus", ["IS 250", "ES 350", "UX 250h", "NX 300"]],
-  ["Mini", ["Cooper", "Clubman", "Countryman", "Hardtop"]],
-  ["Buick", ["Encore", "Verano", "Regal", "Envision"]],
-  ["Mitsubishi", ["Mirage", "Lancer", "Outlander", "Eclipse Cross"]],
-  ["Chrysler", ["200", "300", "Pacifica", "Voyager"]],
-];
-const colors = [
-  "#d8e6e0",
-  "#d9e0e8",
-  "#e8dfd5",
-  "#dce4d5",
-  "#e4dce5",
-  "#d8e1e5",
-];
 const cart = [];
-const inventory = Array.from({ length: 68 }, (_, index) => {
-  const [make, models] = makes[index % makes.length];
-  const year = 2016 + (index % 9);
-  const model = models[Math.floor(index / makes.length) % models.length];
-  const price = Math.min(14800, 3200 + ((index * 823) % 11600));
-  const mileage = 28000 + ((index * 7311) % 92000);
-  const transmission = index % 4 === 0 ? "Manual" : "Automatic";
-  return {
-    id: index + 1,
-    make,
-    model,
-    year,
-    price,
-    mileage,
-    transmission,
-    mpg: 24 + (index % 15),
+let inventory = [];
+const emergencyCars = [
+  {
+    id: 9001,
+    name: "Toyota Corolla",
+    year: 2020,
+    price: 12900,
+    msrp: 18600,
+    mileage: 42100,
+    transmission: "Automatic",
+    mpg: 34,
+    image: "",
     status: "available",
-    color: colors[index % colors.length],
+    color: "#d8e6e0",
+  },
+  {
+    id: 9002,
+    name: "Honda Civic",
+    year: 2019,
+    price: 11700,
+    msrp: 17900,
+    mileage: 50800,
+    transmission: "Automatic",
+    mpg: 36,
+    image: "",
+    status: "available",
+    color: "#d9e0e8",
+  },
+  {
+    id: 9003,
+    name: "Mazda 3",
+    year: 2018,
+    price: 9800,
+    msrp: 16400,
+    mileage: 62300,
+    transmission: "Manual",
+    mpg: 31,
+    image: "",
+    status: "available",
+    color: "#e8dfd5",
+  },
+];
+
+function normalizeVehicle(vehicle) {
+  const name = vehicle.name || `${vehicle.make} ${vehicle.model}`;
+  const nameParts = name.trim().split(/\s+/);
+  return {
+    ...vehicle,
+    name,
+    make: vehicle.make || nameParts.shift(),
+    model: vehicle.model || nameParts.join(" "),
   };
-});
+}
 
 const pages = {
   gallery: document.querySelector("#gallery-page"),
@@ -303,6 +309,23 @@ document.querySelectorAll("[data-page]").forEach((link) =>
 );
 window.addEventListener("resize", drawHero);
 
-applyFilters();
-renderCart();
+async function initializeInventory() {
+  try {
+    const response = await fetch("./cars.json");
+    if (!response.ok) throw new Error(`cars.json returned ${response.status}`);
+    const payload = await response.json();
+    const cars = Array.isArray(payload) ? payload : payload.vehicles;
+    if (!Array.isArray(cars) || !cars.length)
+      throw new Error("cars.json must contain a non-empty array");
+    inventory = cars.map(normalizeVehicle);
+  } catch (error) {
+    console.warn("Could not load cars.json. Using emergency inventory.", error);
+    inventory = emergencyCars.map(normalizeVehicle);
+  }
+  document.querySelector("#inventory-count").textContent = inventory.length;
+  applyFilters();
+  renderCart();
+}
+
 drawHero();
+initializeInventory();
