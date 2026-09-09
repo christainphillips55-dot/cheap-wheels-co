@@ -1,4 +1,4 @@
-const cart = [];
+const cart = JSON.parse(localStorage.getItem("cwc_cart")) || [];
 let inventory = [];
 const emergencyCars = [
   {
@@ -81,6 +81,15 @@ function showPage(pageName) {
       link.classList.toggle("active", link.dataset.page === pageName),
     );
   window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function routeFromHash() {
+  const routes = { browse: "browse", why: "why", cart: "cart" };
+  showPage(routes[window.location.hash.slice(1)] || "gallery");
+}
+
+function syncCart() {
+  localStorage.setItem("cwc_cart", JSON.stringify(cart));
 }
 
 function formatPrice(value) {
@@ -185,9 +194,9 @@ function calculateTotals() {
     0,
   );
   const tax = Math.round(subtotal * 0.07);
-  const grandTotal = subtotal + 499 + tax;
+  const grandTotal = subtotal + 20 + tax;
   document.querySelector("#subtotal-value").textContent = formatPrice(subtotal);
-  document.querySelector("#doc-fee-value").textContent = formatPrice(499);
+  document.querySelector("#doc-fee-value").textContent = formatPrice(20);
   document.querySelector("#tax-value").textContent = formatPrice(tax);
   document.querySelector("#grand-total-value").textContent =
     formatPrice(grandTotal);
@@ -230,12 +239,6 @@ function drawHero() {
   drawCar(document.querySelector("#hero-canvas"), { color: "#123535" }, true);
 }
 
-document.querySelectorAll("[data-page]").forEach((link) =>
-  link.addEventListener("click", (event) => {
-    event.preventDefault();
-    showPage(link.dataset.page);
-  }),
-);
 searchInput.addEventListener("input", applyFilters);
 transmissionFilter.addEventListener("change", applyFilters);
 priceFilter.addEventListener("input", applyFilters);
@@ -250,6 +253,7 @@ document.querySelector("#browse-grid").addEventListener("click", (event) => {
     (item) => item.id === Number(button.dataset.carId),
   );
   if (!cart.includes(vehicle.id)) cart.push(vehicle.id);
+  syncCart();
   renderCart();
   button.textContent = "✓";
   button.disabled = true;
@@ -259,6 +263,7 @@ cartItemsContainer.addEventListener("click", (event) => {
   if (!removeButton) return;
   const index = cart.indexOf(Number(removeButton.dataset.removeId));
   if (index !== -1) cart.splice(index, 1);
+  syncCart();
   renderCart();
 });
 document.querySelector("#proceed-checkout").addEventListener("click", () => {
@@ -290,6 +295,7 @@ document.querySelector("#checkout-form").addEventListener("submit", (event) => {
     return;
   }
   cart.length = 0;
+  localStorage.removeItem("cwc_cart");
   renderCart();
   event.currentTarget.reset();
   checkoutModal.hidden = true;
@@ -297,7 +303,7 @@ document.querySelector("#checkout-form").addEventListener("submit", (event) => {
 });
 document.querySelector("#back-to-inventory").addEventListener("click", () => {
   successScreen.hidden = true;
-  showPage("browse");
+  window.location.hash = "browse";
 });
 document.querySelectorAll("[data-page]").forEach((link) =>
   link.addEventListener("click", () => {
@@ -308,6 +314,8 @@ document.querySelectorAll("[data-page]").forEach((link) =>
   }),
 );
 window.addEventListener("resize", drawHero);
+window.addEventListener("load", routeFromHash);
+window.addEventListener("hashchange", routeFromHash);
 
 async function initializeInventory() {
   try {
@@ -322,6 +330,9 @@ async function initializeInventory() {
     console.warn("Could not load cars.json. Using emergency inventory.", error);
     inventory = emergencyCars.map(normalizeVehicle);
   }
+  const availableIds = new Set(inventory.map((vehicle) => vehicle.id));
+  cart.splice(0, cart.length, ...cart.filter((id) => availableIds.has(id)));
+  syncCart();
   document.querySelector("#inventory-count").textContent = inventory.length;
   applyFilters();
   renderCart();
