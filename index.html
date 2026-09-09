@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Shop inspected, reliable used cars under $15,000 from Cheap Wheels Co."
+    />
+    <meta name="theme-color" content="#f8fafc" />
+    <title>Cheap Wheels Co. | Reliable Used Cars Under $15,000</title>
+    <meta
+      property="og:title"
+      content="Cheap Wheels Co. | Reliable Used Cars Under $15,000"
+    />
+    <meta
+      property="og:description"
+      content="Quality drives. Budget prices. Browse 68 inspected used cars with transparent pricing."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Cheap Wheels Co." />
+    <meta property="og:locale" content="en_US" />
+    <meta
+      property="og:image"
+      content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630' viewBox='0 0 1200 630'%3E%3Crect width='1200' height='630' fill='%230f172a'/%3E%3Ctext x='90' y='300' fill='%2310b981' font-family='Arial' font-size='72' font-weight='700'%3ECHEAP WHEELS CO.%3C/text%3E%3Ctext x='95' y='370' fill='white' font-family='Arial' font-size='32'%3EQuality Drives. Budget Prices.%3C/text%3E%3C/svg%3E"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f172a'/%3E%3Cpath d='M12 37h40l-4-12H16l-4 12Zm5 0v8m30-8v8M20 25l4-9h16l4 9' fill='none' stroke='%2310b981' stroke-width='4' stroke-linejoin='round'/%3E%3Ccircle cx='21' cy='44' r='4' fill='%23fff'/%3E%3Ccircle cx='43' cy='44' r='4' fill='%23fff'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#gallery" aria-label="Cheap Wheels Co. home"
+        ><span class="brand-mark">CW</span
+        ><span>Cheap Wheels <em>Co.</em></span></a
+      >
+      <button
+        class="menu-toggle"
+        id="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="main-nav"
+        aria-label="Open navigation menu"
+      >
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+        <a href="#browse" data-page="browse">Browse</a>
+        <a href="#why" data-page="why">Why Cheap Wheels?</a>
+        <a href="#cart" data-page="cart"
+          >Cart <strong id="cart-count">0</strong></a
+        >
+      </nav>
+    </header>
+
+    <main>
+      <section
+        id="gallery-page"
+        class="page active-page"
+        aria-labelledby="hero-title"
+      >
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">
+              <span></span> Your next car, without the markup
+            </p>
+            <h1 id="hero-title">Quality Rides.<br /><i>Budget Prices.</i></h1>
+            <p class="hero-lede">
+              Hand-picked, thoroughly inspected vehicles that make the smart
+              choice feel like the easy choice.
+            </p>
+            <button
+              class="button button-primary"
+              type="button"
+              data-page="browse"
+            >
+              Browse Collections <span aria-hidden="true">→</span>
+            </button>
+            <div class="hero-proof">
+              <strong>68</strong><span>cars under<br />$15k</span
+              ><strong>150</strong><span>inspection<br />points</span
+              ><strong>0</strong><span>hidden<br />fees</span>
+            </div>
+          </div>
+          <div
+            class="hero-visual"
+            aria-label="Illustration of a dark green sedan"
+          >
+            <canvas id="hero-canvas" aria-hidden="true"></canvas>
+            <div class="visual-label">
+              <span class="pulse-dot"></span> Curated daily <b>09.09.26</b>
+            </div>
+            <div class="visual-stamp">DRIVE<br /><strong>SMART</strong></div>
+          </div>
+        </div>
+        <div class="section-intro">
+          <p class="eyebrow">The good stuff</p>
+          <h2>A better car-buying<br /><i>headspace.</i></h2>
+          <p>Less browsing noise. More cars worth your time.</p>
+        </div>
+        <div class="mini-features">
+          <article>
+            <span>01</span>
+            <h3>Human-picked</h3>
+            <p>Every listing earns its place in our collection.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Clear by design</h3>
+            <p>One price, no surprise add-ons at checkout.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Ready to roll</h3>
+            <p>Inspected and road-ready before you arrive.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="browse-page" class="page" aria-labelledby="browse-title">
+        <div class="page-heading">
+          <div>
+            <p class="eyebrow">The collection</p>
+            <h1 id="browse-title">Find your <i>fit.</i></h1>
+          </div>
+          <p class="heading-note">
+            Every car is inspected, priced clearly,<br />and ready for its next
+            chapter.
+          </p>
+        </div>
+        <div class="control-bar" role="search">
+          <label class="search-control"
+            ><span aria-hidden="true">⌕</span
+            ><input
+              id="search-input"
+              type="search"
+              placeholder="Search make or model"
+              autocomplete="off"
+          /></label>
+          <label class="select-control"
+            ><span>Transmission</span
+            ><select id="transmission-filter">
+              <option value="all">All</option>
+              <option value="Automatic">Automatic</option>
+              <option value="Manual">Manual</option>
+            </select></label
+          >
+          <label class="price-control"
+            ><span>Max price <b id="price-value">$15,000</b></span
+            ><input
+              id="price-filter"
+              type="range"
+              min="3200"
+              max="15000"
+              step="100"
+              value="15000"
+          /></label>
+        </div>
+        <div class="results-meta">
+          <p><strong id="result-count">68</strong> cars that make sense</p>
+          <button class="reset-button" id="reset-filters" type="button">
+            Reset filters
+          </button>
+        </div>
+        <div id="browse-grid" class="vehicle-grid" aria-live="polite"></div>
+        <div id="empty-state" class="empty-state" hidden>
+          <span>◌</span>
+          <h2>No exact match.</h2>
+          <p>Try widening your search or resetting the filters.</p>
+          <button
+            class="button button-secondary"
+            type="button"
+            id="empty-reset"
+          >
+            Reset filters
+          </button>
+        </div>
+      </section>
+
+      <section id="cart-page" class="page" aria-labelledby="cart-title">
+        <div class="page-heading cart-heading">
+          <div>
+            <p class="eyebrow">Your selections</p>
+            <h1 id="cart-title">Ready to <i>roll?</i></h1>
+          </div>
+          <p class="heading-note">
+            A clear path from shortlist<br />to your next set of keys.
+          </p>
+        </div>
+        <div class="cart-layout">
+          <div class="cart-items-panel">
+            <div class="cart-panel-heading">
+              <h2>Your cart</h2>
+              <span id="cart-item-label">0 vehicles</span>
+            </div>
+            <div id="cart-items-container" aria-live="polite"></div>
+          </div>
+          <aside class="invoice-card" aria-labelledby="invoice-title">
+            <p class="eyebrow">The numbers</p>
+            <h2 id="invoice-title">Your <i>invoice.</i></h2>
+            <div class="invoice-lines">
+              <div>
+                <span>Subtotal</span><strong id="subtotal-value">$0</strong>
+              </div>
+              <div>
+                <span>Document fee</span
+                ><strong id="doc-fee-value">$499</strong>
+              </div>
+              <div>
+                <span>Estimated sales tax <small>7%</small></span
+                ><strong id="tax-value">$0</strong>
+              </div>
+            </div>
+            <div class="invoice-total">
+              <span>Grand total</span
+              ><strong id="grand-total-value">$499</strong>
+            </div>
+            <button
+              class="button button-primary checkout-button"
+              id="proceed-checkout"
+              type="button"
+            >
+              Proceed to Guest Checkout <span aria-hidden="true">→</span>
+            </button>
+            <p class="invoice-note">
+              Tax estimate is calculated on vehicle price. Final figures may
+              vary by location.
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section id="why-page" class="page" aria-labelledby="why-title">
+        <div class="why-heading">
+          <p class="eyebrow">The Cheap Wheels standard</p>
+          <h1 id="why-title">Good cars.<br /><i>Good energy.</i></h1>
+          <p>
+            Buying used should feel like a confident decision, not a leap of
+            faith. We built the experience around three promises.
+          </p>
+        </div>
+        <div class="guarantee-grid">
+          <article class="guarantee-card featured">
+            <span class="guarantee-number">01 / 03</span
+            ><span class="guarantee-icon">✦</span>
+            <h2>150-Point<br />Inspection</h2>
+            <p>
+              Our technicians check the things that matter, from brakes to
+              battery to the little details you only notice on month three.
+            </p>
+            <strong>150 <small>checks. zero shortcuts.</small></strong>
+          </article>
+          <article class="guarantee-card">
+            <span class="guarantee-number">02 / 03</span
+            ><span class="guarantee-icon">↗</span>
+            <h2>Zero Hidden<br />Fees</h2>
+            <p>
+              The price you see is the price you plan for. No surprise
+              processing fees, no last-minute accessories.
+            </p>
+            <strong>$0 <small>mystery math.</small></strong>
+          </article>
+          <article class="guarantee-card">
+            <span class="guarantee-number">03 / 03</span
+            ><span class="guarantee-icon">✓</span>
+            <h2>Clean<br />Title</h2>
+            <p>
+              Every vehicle comes with a clean title and a history you can
+              understand before you take the wheel.
+            </p>
+            <strong>100% <small>clear history.</small></strong>
+          </article>
+        </div>
+        <div class="why-footer">
+          <span>Built for the long drive.</span
+          ><span>Since 2014 <b>·</b> Independent by choice</span>
+        </div>
+      </section>
+    </main>
+
+    <div id="checkout-modal" class="modal-overlay" hidden>
+      <div
+        class="modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="checkout-title"
+      >
+        <button
+          class="close-button"
+          id="close-modal"
+          type="button"
+          aria-label="Close checkout"
+        >
+          ×
+        </button>
+        <p class="eyebrow">Almost there</p>
+        <h2 id="checkout-title">Make an <i>inquiry.</i></h2>
+        <p class="modal-copy">
+          Leave your details and our team will be in touch to arrange a relaxed,
+          no-pressure next step.
+        </p>
+        <form id="checkout-form">
+          <label
+            >Full name<input
+              name="name"
+              type="text"
+              autocomplete="name"
+              required
+              placeholder="Alex Morgan" /></label
+          ><label
+            >Email address<input
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+              placeholder="alex@example.com" /></label
+          ><label
+            >Phone number<input
+              name="phone"
+              type="tel"
+              autocomplete="tel"
+              required
+              pattern="[0-9+(). -]{7,}"
+              placeholder="(555) 014-0198" /></label
+          ><button class="button button-primary form-submit" type="submit">
+            Send my inquiry <span aria-hidden="true">→</span>
+          </button>
+          <p class="form-note">Your details stay with our small team.</p>
+        </form>
+      </div>
+    </div>
+    <div id="order-success-screen" class="modal-overlay success-overlay" hidden>
+      <div class="success-card">
+        <span class="success-check">✓</span>
+        <p class="eyebrow">Inquiry received</p>
+        <h2>You’re on the<br /><i>right road.</i></h2>
+        <p>
+          Thanks for reaching out. A Cheap Wheels specialist will be in touch
+          shortly.
+        </p>
+        <button
+          class="button button-light"
+          id="back-to-inventory"
+          type="button"
+        >
+          Back to inventory <span aria-hidden="true">→</span>
+        </button>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
